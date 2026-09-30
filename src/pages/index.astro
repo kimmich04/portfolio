@@ -1,0 +1,103 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Section from '@/components/Section.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import PostList from '@/components/PostList.astro';
+import { SITE, SKILLS, SOCIALS } from '@/consts';
+
+const featuredProjects = (await getCollection('projects', ({ data }) => data.featured))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 4);
+
+const recentPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section class="py-12 sm:py-20">
+    <p class="font-medium text-accent" data-reveal>
+      Hi, I'm
+    </p>
+    <h1 class="mt-2 text-4xl font-bold tracking-tight sm:text-6xl" data-reveal data-reveal-delay="0.1">
+      {SITE.name}
+    </h1>
+    <p class="mt-4 text-xl text-zinc-600 sm:text-2xl dark:text-zinc-400" data-reveal data-reveal-delay="0.2">
+      {SITE.role} based in {SITE.location}.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3" data-reveal data-reveal-delay="0.3">
+      <a href="/projects" class="rounded-lg bg-accent px-5 py-2.5 font-medium text-white transition hover:opacity-90">
+        View my work
+      </a>
+      <a
+        href="#contact"
+        class="rounded-lg border border-zinc-300 px-5 py-2.5 font-medium transition hover:border-accent hover:text-accent dark:border-zinc-700"
+      >
+        Get in touch
+      </a>
+    </div>
+  </section>
+
+  <Section id="about" title="About">
+    <div class="space-y-4 text-zinc-600 dark:text-zinc-400">
+      <p>
+        Write a short introduction here: who you are, what you're studying or working on, and what kind of problems you
+        enjoy solving.
+      </p>
+      <p>Mention what you're looking for next, e.g. internships, collaborations, or full-time roles.</p>
+    </div>
+  </Section>
+
+  <Section id="skills" title="Skills">
+    <dl class="grid gap-6 sm:grid-cols-2">
+      {Object.entries(SKILLS).map(([group, items]) => (
+        <div>
+          <dt class="text-sm font-semibold uppercase tracking-wide text-zinc-500">{group}</dt>
+          <dd class="mt-2 flex flex-wrap gap-2">
+            {items.map((item) => (
+              <span class="rounded-md border border-zinc-200 px-2.5 py-1 text-sm dark:border-zinc-800">{item}</span>
+            ))}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </Section>
+
+  <Section id="projects" title="Featured projects">
+    <div class="grid gap-4 sm:grid-cols-2">
+      {featuredProjects.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+    <a href="/projects" class="mt-6 inline-block text-sm font-medium text-accent hover:underline">
+      All projects →
+    </a>
+  </Section>
+
+  {recentPosts.length > 0 && (
+    <Section id="blog" title="Recent writing">
+      <PostList posts={recentPosts} />
+      <a href="/blog" class="mt-6 inline-block text-sm font-medium text-accent hover:underline">
+        All posts →
+      </a>
+    </Section>
+  )}
+
+  <Section id="contact" title="Contact">
+    <p class="text-zinc-600 dark:text-zinc-400">I'm open to new opportunities. The best way to reach me is by email:</p>
+    <a href={`mailto:${SITE.email}`} class="mt-3 inline-block text-lg font-semibold text-accent hover:underline">
+      {SITE.email}
+    </a>
+    <ul class="mt-6 flex gap-5 text-sm">
+      {SOCIALS.map((s) => (
+        <li>
+          <a href={s.href} target="_blank" rel="noopener noreferrer" class="hover:text-accent">
+            {s.label} ↗
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Section>
+</BaseLayout>

@@ -1,0 +1,68 @@
+---
+import '@fontsource-variable/inter';
+import '@/styles/global.css';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { SITE } from '@/consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = SITE.description } = Astro.props;
+const pageTitle = title ? `${title} | ${SITE.name}` : SITE.title;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+
+    <!-- Runs before paint to apply the saved/system theme without a flash -->
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        root.classList.add('js');
+        let theme = null;
+        try {
+          theme = localStorage.getItem('theme');
+        } catch {}
+        const dark = theme ? theme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        root.classList.toggle('dark', dark);
+      })();
+    </script>
+  </head>
+  <body class="flex min-h-screen flex-col bg-white font-sans text-zinc-800 antialiased dark:bg-zinc-950 dark:text-zinc-200">
+    <Header />
+    <main class="mx-auto w-full max-w-3xl flex-1 px-5 py-12 sm:px-6">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      import { animate, inView } from 'motion';
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduceMotion) {
+        inView('[data-reveal]', (el) => {
+          const delay = Number((el as HTMLElement).dataset.revealDelay ?? 0);
+          animate(el, { opacity: [0, 1], y: [24, 0] }, { duration: 0.6, delay, ease: 'easeOut' });
+        });
+      }
+    </script>
+  </body>
+</html>

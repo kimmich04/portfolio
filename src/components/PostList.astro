@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '@/utils/date';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<ul class="divide-y divide-zinc-200 dark:divide-zinc-800">
+  {posts.map((post) => (
+    <li class="py-4">
+      <a
+        href={`/blog/${post.id}`}
+        class="group flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+      >
+        <span class="font-medium group-hover:text-accent">{post.data.title}</span>
+        <time datetime={post.data.pubDate.toISOString()} class="shrink-0 text-sm text-zinc-500">
+          {formatDate(post.data.pubDate)}
+        </time>
+      </a>
+    </li>
+  ))}
+</ul>

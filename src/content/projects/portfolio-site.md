@@ -1,19 +1,13 @@
 ---
 title: 'Portfolio Website'
 description: 'This site: a fast, static portfolio with a blog, dark mode, and scroll animations.'
-date: 2026-09-29
-tech: ['Astro', 'TypeScript', 'Tailwind CSS', 'Motion']
-repo: 'https://github.com/your-username/portfolio'
-featured: true
+period: '2026'
+order: 5
+tech: ['Astro', 'TypeScript', 'Tailwind CSS v4', 'MDX', 'Motion']
 ---
 
-## Overview
+The site you're looking at. It's a static Astro site, so pages ship as plain HTML with almost no JavaScript.
 
-Describe the problem, your approach, and the result. A good project write-up covers:
-
-- **Problem**: what were you solving, and for whom?
-- **Solution**: key technical decisions and why you made them
-- **Challenges**: what was hard, and how you got past it
-- **Outcome**: what you shipped and what you learned
-
-Add screenshots by placing images in `src/assets/` and importing them, or in `public/` and linking directly.
+- Projects and blog posts are Markdown/MDX files validated by typed content-collection schemas.
+- Light/Dark mode follows the OS by default, remembers your choice, and applies before first paint so there's no flash.
+- Scroll-reveal animations use Motion and are turned off when the browser asks for reduced motion.

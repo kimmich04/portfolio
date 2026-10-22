@@ -4,14 +4,14 @@ Personal portfolio built with [Astro](https://astro.build), Tailwind CSS v4, MDX
 
 ## Commands
 
-| Command                | Action                                  |
-| :--------------------- | :-------------------------------------- |
-| `npm install`          | Install dependencies                    |
-| `npm run dev`          | Start dev server at `localhost:4321`    |
-| `npm run build`        | Build the static site to `./dist/`      |
-| `npm run preview`      | Preview the production build locally    |
-| `npm run check`        | Type-check `.astro` and `.ts` files     |
-| `npm run format`       | Format everything with Prettier         |
+| Command           | Action                               |
+| :---------------- | :----------------------------------- |
+| `npm install`     | Install dependencies                 |
+| `npm run dev`     | Start dev server at `localhost:4321` |
+| `npm run build`   | Build the static site to `./dist/`   |
+| `npm run preview` | Preview the production build locally |
+| `npm run check`   | Type-check `.astro` and `.ts` files  |
+| `npm run format`  | Format everything with Prettier      |
 
 ## Project structure
 

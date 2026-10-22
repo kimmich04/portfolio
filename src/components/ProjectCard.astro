@@ -6,7 +6,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, description, tech, repo, demo } = project.data;
+const { title, description, company, tech, repo, demo } = project.data;
 ---
 
 <article class="group rounded-xl border border-zinc-200 p-5 transition hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-lg dark:border-zinc-800">
@@ -15,6 +15,7 @@ const { title, description, tech, repo, demo } = project.data;
       {title}
     </a>
   </h3>
+  {company && <p class="mt-1 text-xs text-zinc-500">{company}</p>}
   <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{description}</p>
   {tech.length > 0 && (
     <ul class="mt-4 flex flex-wrap gap-2">

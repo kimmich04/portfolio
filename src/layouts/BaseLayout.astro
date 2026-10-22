@@ -40,7 +40,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         let theme = null;
         try {
           theme = localStorage.getItem('theme');
-        } catch {}
+        } catch {
+          // Storage can be blocked (e.g. private mode); fall back to the system theme
+        }
         const dark = theme ? theme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
         root.classList.toggle('dark', dark);
       })();

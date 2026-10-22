@@ -19,7 +19,10 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    date: z.coerce.date(),
+    company: z.string().optional(),
+    period: z.string(),
+    // Lower numbers are listed first
+    order: z.number().default(99),
     tech: z.array(z.string()).default([]),
     repo: z.url().optional(),
     demo: z.url().optional(),

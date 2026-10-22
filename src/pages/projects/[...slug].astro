@@ -1,7 +1,6 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { formatDate } from '@/utils/date';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -13,7 +12,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, description, date, tech, repo, demo } = project.data;
+const { title, description, company, period, tech, repo, demo } = project.data;
 const { Content } = await render(project);
 ---
 
@@ -26,7 +25,8 @@ const { Content } = await render(project);
       <h1 class="text-4xl font-bold tracking-tight">{title}</h1>
       <p class="mt-3 text-lg text-zinc-600 dark:text-zinc-400">{description}</p>
       <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-zinc-500">
-        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+        {company && <span>{company}</span>}
+        <span>{period}</span>
         {tech.length > 0 && <span>{tech.join(' · ')}</span>}
       </div>
       <div class="mt-4 flex gap-4 text-sm font-medium">

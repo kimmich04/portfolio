@@ -38,6 +38,8 @@
     const dark = document.documentElement.classList.toggle('dark');
     try {
       localStorage.setItem('theme', dark ? 'dark' : 'light');
-    } catch {}
+    } catch {
+      // Storage can be blocked (e.g. private mode); the toggle still works for this page view
+    }
   });
 </script>

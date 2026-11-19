@@ -2,7 +2,8 @@
 title: 'Smash Club'
 description: 'Online sport booking platform: NestJS microservices with RabbitMQ events, Prisma queries, and a Next.js frontend.'
 company: 'Kenix Solution'
-period: 'Aug 2025 – Mar 2026'
+period: 'Oct 2025 – Mar 2026'
+demo: 'https://smash-club.net'
 order: 2
 tech:
   [

@@ -13,10 +13,64 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Page background: soft color glows plus a faint dot grid on top of the base color.
+   Lives on a fixed pseudo-element behind all content, so it doesn't scroll or affect layout. */
+:root {
+  --glow-a: oklch(0.75 0.14 260 / 0.28); /* blue */
+  --glow-b: oklch(0.78 0.15 320 / 0.22); /* pink-violet */
+  --glow-c: oklch(0.82 0.12 200 / 0.2); /* cyan */
+  --dot: oklch(0.5 0.02 260 / 0.16);
+}
+
+:root.dark {
+  --glow-a: oklch(0.5 0.2 262 / 0.38);
+  --glow-b: oklch(0.45 0.2 310 / 0.3);
+  --glow-c: oklch(0.5 0.14 210 / 0.24);
+  --dot: oklch(0.8 0.02 260 / 0.1);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(40rem 32rem at 8% -4%, var(--glow-a), transparent 70%),
+    radial-gradient(36rem 30rem at 96% 6%, var(--glow-b), transparent 70%),
+    radial-gradient(44rem 30rem at 50% 108%, var(--glow-c), transparent 70%),
+    radial-gradient(var(--dot) 1px, transparent 1px) 0 0 / 22px 22px;
+  /* Fade the dot grid out toward the bottom so text stays easy to read */
+  mask-image: linear-gradient(to bottom, black 0%, black 55%, rgb(0 0 0 / 0.35) 100%);
+}
+
 /* Elements marked data-reveal start hidden and are animated in by motion.
    The .js class is only set when JS runs, so content stays visible without it. */
 .js [data-reveal] {
   opacity: 0;
+}
+
+/* Printing (Ctrl+P): a clean black-on-white page without chrome, glows or animations */
+@media print {
+  header,
+  footer,
+  #scroll-progress,
+  body::before {
+    display: none !important;
+  }
+  * {
+    color: #111 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  .js [data-reveal] {
+    opacity: 1 !important;
+  }
+  section,
+  article,
+  li {
+    break-inside: avoid;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

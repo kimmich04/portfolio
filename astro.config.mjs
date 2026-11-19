@@ -7,8 +7,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // TODO: replace with your deployed URL (needed for sitemap and canonical links)
-  site: 'https://example.com',
+  // Deployed URL (used for sitemap and canonical links)
+  site: 'https://portfolio-nguyenkim.vercel.app',
 
   vite: {
     plugins: [tailwindcss()],

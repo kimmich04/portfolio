@@ -6,11 +6,12 @@ import Section from '@/components/Section.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import PostList from '@/components/PostList.astro';
 import { EDUCATION, EXPERIENCE, SITE, SKILLS, SOCIALS } from '@/consts';
+import { getSkillIcon } from '@/utils/icons';
 import avatar from '@/assets/avatar.jpg';
 
 const featuredProjects = (await getCollection('projects', ({ data }) => data.featured))
   .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 4);
+  .slice(0, 6);
 
 const recentPosts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -21,6 +22,18 @@ const recentPosts = (await getCollection('blog', ({ data }) => !data.draft))
   <!-- Hero -->
   <section class="flex flex-col-reverse gap-8 py-12 sm:flex-row sm:items-center sm:justify-between sm:py-20">
     <div>
+      {SITE.openToWork && (
+        <p
+          class="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-700 dark:text-emerald-400"
+          data-reveal
+        >
+          <span class="relative flex size-2">
+            <span class="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500 opacity-75 motion-reduce:animate-none" />
+            <span class="relative inline-flex size-2 rounded-full bg-emerald-500" />
+          </span>
+          Open to work
+        </p>
+      )}
       <p class="font-medium text-accent" data-reveal>
         Hi, I'm
       </p>
@@ -42,6 +55,13 @@ const recentPosts = (await getCollection('blog', ({ data }) => !data.draft))
           class="rounded-lg border border-zinc-300 px-5 py-2.5 font-medium transition hover:border-accent hover:text-accent dark:border-zinc-700"
         >
           Get in touch
+        </a>
+        <a
+          href={SITE.cv}
+          download
+          class="rounded-lg border border-zinc-300 px-5 py-2.5 font-medium transition hover:border-accent hover:text-accent dark:border-zinc-700"
+        >
+          Download CV
         </a>
       </div>
     </div>
@@ -69,7 +89,14 @@ const recentPosts = (await getCollection('blog', ({ data }) => !data.draft))
         enjoy removing duplicated code and tracking down production issues. I'm used to working in Agile teams with
         CI/CD workflows.
       </p>
+      <p>
+        I use AI daily, from Claude with MCP to generate theme-compliant components at Bosch to LangChain agents in my
+        hackathon projects, but I always understand and own what I ship.
+      </p>
     </div>
+    <blockquote class="mt-8 border-l-4 border-accent pl-4 text-lg font-medium text-zinc-800 italic dark:text-zinc-200">
+      Let AI amplify you, not replace you.
+    </blockquote>
   </Section>
 
   <Section id="experience" title="Experience">
@@ -98,9 +125,24 @@ const recentPosts = (await getCollection('blog', ({ data }) => !data.draft))
         <div>
           <dt class="text-sm font-semibold tracking-wide text-zinc-500 uppercase">{group}</dt>
           <dd class="mt-2 flex flex-wrap gap-2">
-            {items.map((item) => (
-              <span class="rounded-md border border-zinc-200 px-2.5 py-1 text-sm dark:border-zinc-800">{item}</span>
-            ))}
+            {items.map((item) => {
+              const icon = getSkillIcon(item);
+              return (
+                <span class="inline-flex items-center gap-1.5 rounded-md border border-zinc-200 bg-white/60 px-2.5 py-1 text-sm backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/50">
+                  {icon && (
+                    <svg
+                      viewBox="0 0 24 24"
+                      class="size-4 shrink-0"
+                      fill={icon.color ?? 'currentColor'}
+                      aria-hidden="true"
+                    >
+                      <path d={icon.path} />
+                    </svg>
+                  )}
+                  {item}
+                </span>
+              );
+            })}
           </dd>
         </div>
       ))}
@@ -154,7 +196,12 @@ const recentPosts = (await getCollection('blog', ({ data }) => !data.draft))
     >
       {SITE.email}
     </a>
-    <ul class="mt-6 flex gap-5 text-sm">
+    <ul class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+      <li>
+        <a href={SITE.cv} download class="hover:text-accent">
+          Download CV ↓
+        </a>
+      </li>
       {SOCIALS.map((s) => (
         <li>
           <a href={s.href} target="_blank" rel="noopener noreferrer" class="hover:text-accent">

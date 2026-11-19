@@ -13,7 +13,11 @@ import { NAV_LINKS, SITE } from '@/consts';
       <ul class="flex items-center gap-3 text-sm sm:gap-5">
         {NAV_LINKS.map((link) => (
           <li>
-            <a href={link.href} class="text-zinc-600 transition-colors hover:text-accent dark:text-zinc-400">
+            <a
+              href={link.href}
+              data-nav-link={link.href}
+              class="text-zinc-600 transition-colors hover:text-accent aria-[current=true]:font-semibold aria-[current=true]:text-accent dark:text-zinc-400"
+            >
               {link.label}
             </a>
           </li>
@@ -23,3 +27,40 @@ import { NAV_LINKS, SITE } from '@/consts';
     </div>
   </nav>
 </header>
+
+<script>
+  // Highlights the current page, and on the home page the section being read.
+  const links = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
+
+  const setActive = (href: string | null) => {
+    links.forEach((a) => {
+      if (a.dataset.navLink === href) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+  };
+
+  const path = window.location.pathname;
+  if (path.startsWith('/projects')) {
+    setActive('/projects');
+  } else if (path.startsWith('/blog')) {
+    setActive('/blog');
+  } else if (path === '/') {
+    // Home section id -> nav link it belongs to (sections not listed clear the highlight)
+    const sectionToNav: Record<string, string> = {
+      experience: '/#experience',
+      projects: '/projects',
+      blog: '/blog',
+      contact: '/#contact',
+    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(sectionToNav[entry.target.id] ?? null);
+        }
+      },
+      // Only the band around the middle of the viewport counts as "being read"
+      { rootMargin: '-40% 0px -55% 0px' },
+    );
+    document.querySelectorAll('main section[id]').forEach((s) => observer.observe(s));
+  }
+</script>

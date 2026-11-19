@@ -2,7 +2,8 @@
 title: 'Nam Nhi Pharmacity'
 description: 'Online pharmacy e-commerce platform: 14 REST APIs, JWT auth with rotating refresh tokens, and queue-based email.'
 company: 'Kenix Solution'
-period: 'Aug 2025 – Mar 2026'
+period: 'Oct 2025 – Mar 2026'
+demo: 'https://nhathuocnamnhi.com.vn'
 order: 3
 tech: ['NestJS', 'Prisma', 'Redis/BullMQ', 'Next.js 16', 'React 19', 'Tailwind CSS']
 featured: true

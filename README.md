@@ -35,6 +35,11 @@ src/
 - **Deployed URL**: set `site` in `astro.config.mjs` (used for sitemap and canonical links).
 - **Accent color / font**: edit the `@theme` block in `src/styles/global.css`.
 - **Animations**: add `data-reveal` (and optionally `data-reveal-delay="0.2"`) to any element to fade it in on scroll.
+- **CV download**: replace `public/Nguyen-Kim-Tran-CV.pdf` (the path is `SITE.cv` in `src/consts.ts`).
+- **"Open to work" badge**: set `SITE.openToWork` to `false` in `src/consts.ts` to hide it.
+- **Skill logos**: add a line to the map in `src/utils/icons.ts` (logos come from the `simple-icons` package).
+- **Project badge / extra links**: use `badge:` and `links:` in a project's frontmatter.
+- **Share image and icons**: `public/og.png` (1200×630), `favicon.svg`, `favicon.ico` and `apple-touch-icon.png` are plain files; replace them to change how the site looks in link previews and browser tabs.
 
 ## Deploy
 

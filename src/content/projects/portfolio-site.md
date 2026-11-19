@@ -2,7 +2,7 @@
 title: 'Portfolio Website'
 description: 'This site: a fast, static portfolio with a blog, dark mode, and scroll animations.'
 period: '2026'
-order: 5
+order: 8
 tech: ['Astro', 'TypeScript', 'Tailwind CSS v4', 'MDX', 'Motion']
 ---
 

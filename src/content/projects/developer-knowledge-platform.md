@@ -1,6 +1,6 @@
 ---
 title: 'Developer Knowledge Platform'
-description: 'Internal web application at Bosch: shared component library, i18n and API migrations, auth fixes, and a 50 → 80+ Lighthouse score.'
+description: 'Internal web application at Bosch: shared component library, i18n and API migrations, auth fixes, and web performance scores raised from under 50 to 80+.'
 company: 'Bosch Global Software Technologies Vietnam'
 period: 'Apr 2026 – Sep 2026'
 order: 1
@@ -14,11 +14,11 @@ An internal web application I worked on as a Frontend Developer Intern, contribu
 
 - Built a shared component library with **4 themes** and Light/Dark/System mode, with live OS sync and no flash on load.
 - Published it as a private package, now **adopted by 5 applications**.
-- Developed **20+ reusable hooks, components and utilities**, which delivered 8 features and cut duplicated logic in one module by ~30%.
+- Developed **20+ reusable hooks, components and utilities** for an internal admin dashboard, improving UI consistency across account, profile and reporting pages.
 
 ## Performance
 
-Improved the Lighthouse performance score from **under 50 to 80+** by:
+Improved web performance scores (LCP, FID, CLS, TTFB) from **under 50 to 80+** by:
 
 - route-based code splitting and vendor chunking
 - lazy-loading translations, cutting ~200 KB from the initial load

@@ -2,10 +2,9 @@
 title: 'Zalo QR Follow Tracking Service'
 description: 'Real-time service that logs every new Zalo OA follower to Google Sheets and attributes it to the QR code or campaign that brought them in.'
 company: 'Kenix Solution'
-period: 'Aug 2025 – Mar 2026'
-order: 4
+period: 'Oct 2025 – Mar 2026'
+order: 7
 tech: ['NestJS', 'TypeScript', 'Socket.IO', 'Google Sheets API', 'Docker']
-featured: true
 ---
 
 A NestJS service that records every new follower of a business's Zalo Official Account (OA) in Google Sheets in real time, and tracks which QR code or campaign (`ref`) brought each follower in.

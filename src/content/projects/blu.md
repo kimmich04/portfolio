@@ -1,6 +1,6 @@
 ---
 title: 'Blu'
-description: 'AI chat app built at an AI-native hackathon: I built the entire frontend, with type-driven rendering of 6 AI response types and a fault-tolerant API layer.'
+description: 'AI chat app built at an AI-native hackathon: a React frontend with type-driven rendering of 6 AI response types and a fault-tolerant API layer.'
 company: 'VAIC 2026 · NIC & Meta'
 role: 'Frontend Developer · Team of 6'
 period: '2026'
@@ -12,11 +12,11 @@ tech: ['React', 'TypeScript']
 featured: true
 ---
 
-Built at **VAIC 2026 — AI-native Hackathon** (NIC & Meta, 1500+ participants) in a team of 6. I built the entire frontend.
+Built at **VAIC 2026 — AI-native Hackathon** (NIC & Meta, 1500+ participants) in a team of 6. I built the frontend with React.
 
 ## Structure
 
-- **16 components, 2 custom hooks and 3 service modules**, organized into components / hooks / services / types / utils layers.
+- **16 components, 2 custom hooks and 3 service modules.**
 
 ## Type-driven rendering
 
@@ -34,4 +34,4 @@ Built at **VAIC 2026 — AI-native Hackathon** (NIC & Meta, 1500+ participants) 
 
 ## React patterns
 
-Lazy state initialization, immutable updates, `useEffect`/`useRef` for side effects and the DOM, `useCallback`, controlled components and optimistic UI, in a responsive, mobile-first layout.
+Lazy state initialization, immutable updates, `useEffect`/`useRef` for side effects and the DOM, `useCallback`, controlled components and optimistic UI, in a responsive UI.

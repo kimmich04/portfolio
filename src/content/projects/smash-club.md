@@ -1,41 +1,29 @@
 ---
 title: 'Smash Club'
-description: 'Online sport booking platform: NestJS microservices with RabbitMQ events, Prisma queries, and a Next.js frontend.'
+description: 'Online sports booking platform: NestJS microservices with RabbitMQ events, a 16× faster booking search, and fixes for N+1 queries and overbooking.'
 company: 'Kenix Solution'
 period: 'Oct 2025 – Mar 2026'
 demo: 'https://smash-club.net'
 order: 2
-tech:
-  [
-    'NestJS 11',
-    'TypeScript',
-    'Prisma 6',
-    'PostgreSQL',
-    'RabbitMQ',
-    'Redis',
-    'Next.js 15',
-    'React 19',
-    'Tailwind CSS v4',
-    'shadcn/ui',
-    'GitLab CI',
-  ]
+tech: ['NestJS', 'Next.js', 'React', 'RabbitMQ', 'Redis', 'Prisma', 'PostgreSQL', 'Docker']
 featured: true
 ---
 
-An online sport booking platform built with a microservice backend and a Next.js frontend.
+An online sports booking platform built with a microservice backend and a Next.js frontend.
 
-## Backend
+## Backend design
 
-- Designed and built a **Subcourt management module** in NestJS with a layered structure (controller, service, repository, DTOs, mapper), 4 REST endpoints, Prisma schema and migrations, and time-slot conflict detection.
-- Built **event-driven notifications** with RabbitMQ: the core service publishes a subcourt-created event, and the workflow service sends HTML emails that respect each user's notification settings.
-- Rewrote the booking search as a **single dynamic Prisma query** with database-level pagination and a parallel count, replacing about 470 lines of in-memory filtering.
-- Built court and tournament management APIs (update/soft delete, tournament detail updates with DTO validation) and cleared the Redis cache on writes.
+- Designed **4 REST endpoints** in a NestJS module following a clean layered structure (controller, service, repository, DTOs, mapper).
+- Built **event-driven notifications** between microservices with RabbitMQ: the core service publishes an event to a durable queue, and the workflow service consumes it with manual ack/nack (requeue on failure) and sends HTML emails that respect each user's notification settings. This keeps SMTP latency off the API response path.
+
+## Performance and correctness
+
+- Rewrote the booking search API as a **single dynamic Prisma query** with DB-level pagination, cutting median latency **16× (109 → 7 ms)** and payload **1.2 MB → 13 KB**.
+- Eliminated an **N+1 query** in the notification read API with a batched ownership check, reducing SQL statements from 2N+1 to 2.
+- Eliminated an **overbooking race condition** using a transaction and pessimistic locking.
 - Resolved **Prisma migration drift** in the processing service by baselining the schema into a single initial migration and marking it as applied, which unblocked deployments without resetting existing data.
 
-## Frontend
+## Delivery
 
-- Refactored the tournament UI into a reusable hook and a typed service layer, simplifying the main tournament modal.
-
-## Production fixes
-
-Fixed 6 production bugs across frontend and backend (pricing display, tournament creation and registration, category editing 404, gender categorization, district search) in a Scrum/GitLab workflow. 15 of my commits reached the production branch.
+- Fixed **5 production bugs** relating to query filtering, API response mapping and cache invalidation, tracked in Jira and shipped through a Scrum/GitLab workflow.
+- Built and deployed backend services to the team's dev and UAT environments over SSH (Termius), verifying changes against UAT before release to production.

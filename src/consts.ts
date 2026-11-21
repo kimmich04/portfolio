@@ -28,10 +28,10 @@ export const NAV_LINKS = [
 ];
 
 export const SKILLS: Record<string, string[]> = {
-  Languages: ['TypeScript', 'JavaScript', 'Python', 'C/C++'],
+  Languages: ['TypeScript', 'JavaScript', 'Python'],
   Frontend: ['React', 'Vite', 'Next.js', 'HTML/CSS', 'Tailwind CSS'],
   Backend: ['Node.js', 'NestJS', 'Express', 'FastAPI', 'LangChain'],
-  Database: ['MySQL', 'PostgreSQL', 'Firebase', 'Redis'],
+  Database: ['MySQL', 'PostgreSQL', 'Redis'],
   'ORM & Migration': ['Prisma', 'SQLAlchemy', 'Alembic'],
   'DevOps & Tools': ['Git', 'GitHub Actions', 'GitLab', 'Postman', 'Docker'],
   'Architecture & Messaging': ['Microservices', 'RabbitMQ', 'BullMQ', 'Webhooks'],
@@ -44,10 +44,11 @@ export const EXPERIENCE = [
     role: 'Frontend Developer Intern',
     period: 'Apr 2026 – Sep 2026',
     highlights: [
-      'Built a shared component library with 4 themes and Light/Dark/System mode, published as a private package and adopted by 5 applications.',
-      'Raised web performance scores (LCP, FID, CLS, TTFB) from under 50 to 80+ with route-based code splitting, vendor chunking and lazy-loaded translations (~200 KB off the initial load).',
-      'Migrated i18n for 10 languages (~730 keys each) from an Azure API to bundled files, and moved 6 Redux slices to v2 API clients generated from OpenAPI specs.',
-      'Set up 3 CI/CD pipelines and shipped changes across 13 sprints in a 5-person Scrum team.',
+      'Shipped 8 features for an internal employee portal (React, TypeScript, Redux Toolkit) and built 10+ reusable hooks, components and utilities across the news, events and admin modules.',
+      'Cut the initial JS payload by ~61% (2.0 MB → 778 KB) with route-level code splitting, vendor chunking and on-demand locale loading.',
+      'Migrated 35 REST endpoints across 30 files from API v1 to v2 using Orval-generated TypeScript clients, and set up 3 CI/CD pipelines.',
+      'Wrote Vitest unit tests for Redux thunks, time-dependent logic and a single-flight token-refresh interceptor, and fixed a race condition in the SSO logout flow.',
+      'Worked in a 5-person Scrum team across 13 sprints, and applied a Claude-based SDLC workflow (Figma and Jira via MCP, planner/implementer/reviewer agents).',
     ],
   },
   {
@@ -55,10 +56,10 @@ export const EXPERIENCE = [
     role: 'Full-stack Developer · Remote',
     period: 'Oct 2025 – Mar 2026',
     highlights: [
-      'Built NestJS + Prisma backends for three client products: a sport booking platform, an online pharmacy and a Zalo follower-tracking service.',
-      'Implemented JWT authentication with rotating refresh tokens and reuse detection, plus queue-based email with RabbitMQ and Redis/BullMQ.',
-      'Replaced ~470 lines of in-memory filtering with a single paginated Prisma query.',
-      'Fixed 6 production bugs across frontend and backend; 15 commits reached the production branch.',
+      'Built NestJS + Prisma backends for two client products, a sports booking platform (Smash Club) and an online pharmacy (Nam Nhi Pharmacity), plus their Next.js frontends.',
+      'Cut booking-search median latency 16× (109 → 7 ms) with a single dynamic Prisma query, and eliminated an N+1 query and an overbooking race condition (transaction + pessimistic locking).',
+      'Built event-driven notifications with RabbitMQ (durable queue, manual ack/nack) and queue-based email on Redis/BullMQ, keeping SMTP latency off API responses.',
+      'Implemented JWT authentication with rotating refresh tokens and reuse detection, deployed to dev and UAT over SSH, and fixed 5 production bugs in a Scrum/GitLab workflow.',
     ],
   },
 ];

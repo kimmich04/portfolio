@@ -11,18 +11,29 @@ links:
   - label: 'Try the Zalo bot'
     href: 'https://bot.zaloplatforms.com/bots/455572586906579631'
 order: 4
-tech: ['Python', 'FastAPI', 'LangChain', 'PostgreSQL', 'React', 'Supabase', 'Railway', 'Vercel', 'GitHub Actions']
+tech:
+  [
+    'Python',
+    'FastAPI',
+    'LangChain',
+    'SQLAlchemy',
+    'Alembic',
+    'PostgreSQL',
+    'Supabase',
+    'Railway',
+    'Vercel',
+    'GitHub Actions',
+  ]
 featured: true
 ---
 
 Built at **K-tech Hackathon 2026 — AI for Business Innovation** (LIKELION, 200+ participants), where I led a team of 5 and owned the backend and AI parts.
 
-Staff at F&B chains report stock movements in a Zalo chat; Storagemate turns those messages into stock-in/stock-out records, and managers can ask questions about their inventory in plain language.
+Staff at F&B chains report stock movements in a Zalo chat; Storagemate turns those messages into stock-in/stock-out records, and managers can ask questions about their inventory in plain language. It runs on a Postgres-backed message queue, a background worker and a React dashboard.
 
-## Architecture
+## Backend
 
-- Designed the architecture: a Zalo bot feeding a **Postgres-backed message queue**, a background worker that processes messages, and a React dashboard.
-- Structured the FastAPI backend into **domain-based packages** (router, schemas, models, service and dependencies per domain) for maintainability.
+- Structured the **FastAPI backend into domain-based packages** (router, schemas, models, service and dependencies per domain) for maintainability.
 
 ## AI agent
 
